@@ -1,0 +1,82 @@
+# Versión estadística del "Camino del tardígrado"
+
+import random as az
+
+dado = int(input("Bienvenidas al 'Camino del Tardígrade'. Decidamos primero algunas cosas: ¿Con qué dado quieren jugar? "))+1
+tablero = int(input("¿Qué tamaño tendrá el tablero? "))
+
+class Jugador:
+	nombre = ""
+	pos = 0
+	estr = 0
+	
+	def estrategia(self, A):
+		if (A<self.estr):
+			return az.randrange(1, dado)
+
+		else:
+			return A
+
+Jugador1 = Jugador()
+Jugador1.nombre = input ("¿Cómo va a llamarse la primera jugadora? ")
+
+Jugador2 = Jugador()
+Jugador2.nombre = input ("¿Y la segunda? ")
+
+Jugador1.estr = int(input(Jugador1.nombre + " ¿Cuál va a ser tu estrategia? "))
+
+todosLosTiros = []
+todosLosTirosEstrategicos = []
+ganadore = ""
+
+def Juego(J1, J2):
+	global todosLosTiros, todosLosTirosEstrategicos, ganadore, dado, tablero
+	if (J2.pos>tablero):
+		#mensaje = J2.nombre + " es le ganadore por " + str(J2.pos - J1.pos)
+		#print(mensaje)
+		ganadore = J2.nombre
+		
+	else:
+		tiro = az.randrange(1, dado)
+		tiroEstrategico = J1.estrategia(tiro)
+		J1.pos = J1.pos + tiroEstrategico
+		#print(J1.nombre + " sacó " + str(estratiro) + " y va " + str(J1.pos) + " (su primer tiro fue " + str(tiro) + ")")
+		todosLosTiros = todosLosTiros + [tiro]
+		todosLosTirosEstrategicos = todosLosTirosEstrategicos + [tiroEstrategico]
+		Juego(J2,J1)
+
+#Juego(Jugador1, Jugador2)
+
+j = 0
+
+
+while (j < dado):
+
+	Jugador2.estr = j
+
+	i = 0
+	cantidadDePartidas = 5000
+	campeone = []
+	resumenTiros = []
+
+	while (i < cantidadDePartidas):
+		Juego(Jugador1, Jugador2)
+		campeone = campeone + [ganadore]
+		Jugador1.pos = 0
+		Jugador2.pos = 0
+		todosLosTiros = []
+		todosLosTirosEstrategicos = []
+		i = i+1
+
+
+	victoriasJugador1 = campeone.count(Jugador1.nombre)
+	victoriasJugador2 = campeone.count(Jugador2.nombre)
+	porcentajeJugador1 = victoriasJugador1 * 100 / cantidadDePartidas
+	porcentajeJugador2 = victoriasJugador2 * 100 / cantidadDePartidas
+
+	print ("Estrategia " + Jugador1.nombre + ": " + str(Jugador1.estr) + ", " + "Estrategia " + Jugador2.nombre + ": " + str(Jugador2.estr) + "." )
+	print (Jugador1.nombre + " ganó el " + str(porcentajeJugador1) + "%" + " de las partidas.")
+	print (Jugador2.nombre + " ganó el " + str(porcentajeJugador2) + "%" + " de las partidas.")
+	print ()
+
+	j = j+1
