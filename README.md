@@ -3,7 +3,7 @@ Este programa simula un tablero lineal de la cantidad de casillas que quiera el 
 
 El juego consiste en tirar un dado y decidir si quedarse con el valor que salió y avanzar esa cantidad de casillas o volver a tirar y avanzar esa cantidad de casillas, despúes el otro jugador hace lo mismo. Gana el que llega primero al último casillero del tablero.
 
-En este programa primero se le pide al usuario que elige el largo del tablero y que tipo de dado quiere utilizar (elige cuantos valores va a tener el dado).
+En este programa primero se le pide al usuario que elija el tamaño del tablero y que tipo de dado quiere utilizar (elige cuantos valores va a tener el dado).
 
 Luego te permite ponerle nombre a los jugadores.
 
